@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Body,
   Controller,
@@ -12,6 +13,8 @@ import {
 } from '@nestjs/common';
 
 import { ProductsService } from './products.service';
+import { CreateProductsDto } from './dto/create.dto';
+import { UpdateProductDto } from './dto/update.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -30,28 +33,21 @@ export class ProductsController {
   }
   @Get(':productId')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('productId') productId: any) {
-    // return {
-    //   message: `this is your ID ${productId}`,
-    // };
+  getOne(@Param('productId') productId: string) {
     return this.productsService.fillOne(+productId);
   }
 
   @Post()
-  create(@Body() payload: any) {
-    // return {
-    //   message: 'a sido creado',
-    //   payload,
-    // };
+  create(@Body() payload: CreateProductsDto) {
     return this.productsService.create(payload);
   }
   @Put(':id')
-  update(@Param('id') id: string, @Body() payload: any) {
+  update(@Param('id') id: string, @Body() payload: UpdateProductDto) {
     return this.productsService.update(+id, payload);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
-    return id;
+  delete(@Param('id') id: string) {
+    return this.productsService.delete(+id);
   }
 }
