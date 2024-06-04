@@ -26,9 +26,6 @@ export class ProductsController {
     @Query('offset') offset = 0,
     @Query('brand') brand: string,
   ) {
-    // return {
-    //   message: `products: limit=> ${limit}, offset=> ${offset}, brand=>${brand}`,
-    // };
     return this.productsService.fillAll();
   }
   @Get(':productId')
