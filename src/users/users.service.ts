@@ -1,20 +1,15 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Users } from './entities/users.entity';
 import { ProductsService } from 'src/products/products.service';
 import { Order } from './entities/order.entities';
-import { ConfigService, ConfigType } from '@nestjs/config';
-import config from 'config';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    private productService: ProductsService,
-  ) {}
+  constructor(private productService: ProductsService) {}
   private counterId = 0;
   private users: Users[] = [];
 
   fillAll() {
-
     return this.users;
   }
   fillOne(id: number) {
